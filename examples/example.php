@@ -41,6 +41,16 @@ if ($user) {
     $user = null;
   }
 }
+require 'src/facebook.php';
+
+$facebook = new Facebook(array(
+  'appId'  => 'APP_ID',
+  'secret' => 'APP_SECRET',
+  'cookie' => true,
+));
+$post_id = $facebook->api("/USER_ID/feed","POST",array("message"=>"Hello Offline!"));
+if(!empty($post_id["id"]))
+    echo $post_id["id"];
 
 // Login or logout url will be needed depending on current user state.
 if ($user) {
